@@ -10,8 +10,8 @@ A production-ready full-stack lead capture and management platform built with **
 
 | Resource | URL |
 | :--- | :--- |
-| **Public Site** | https://lead-desk-mini.vercel.app |
-| **Admin Portal** | https://lead-desk-mini.vercel.app/admin |
+| **Public Site** | https://lead-desk-mini-weld.vercel.app |
+| **Admin Portal** | https://lead-desk-mini-weld.vercel.app/admin |
 
 ### Test Credentials
 
@@ -204,14 +204,14 @@ lead-desk-mini/
 
 ### Example: Submit a Lead
 ```bash
-curl -X POST https://lead-desk-mini.vercel.app/api/leads \
+curl -X POST https://lead-desk-mini-weld.vercel.app/api/leads \
   -H "Content-Type: application/json" \
   -d '{"name":"Jane Doe","email":"jane@example.com","budgetRange":"$5,000 - $10,000","message":"Interested in a new website redesign project."}'
 ```
 
 ### Example: Update Lead Status (requires session cookie)
 ```bash
-curl -X PATCH https://lead-desk-mini.vercel.app/api/leads/cm_xxx \
+curl -X PATCH https://lead-desk-mini-weld.vercel.app/api/leads/cm_xxx \
   -H "Content-Type: application/json" \
   -H "Cookie: leaddesk_session=<token>" \
   -d '{"status":"CONTACTED"}'
