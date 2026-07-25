@@ -5,6 +5,8 @@ import { LogoutButton } from "@/components/admin/LogoutButton";
 import Link from "next/link";
 import { ArrowLeft, Shield, Sparkles } from "lucide-react";
 import { Lead } from "@/types/lead";
+import type { Lead as PrismaLead } from "@prisma/client";
+
 
 // Opt out of caching for admin dashboard to ensure fresh data
 export const dynamic = "force-dynamic";
@@ -22,7 +24,7 @@ export default async function AdminPage() {
       },
     });
 
-    initialLeads = rawLeads.map((l) => ({
+    initialLeads = rawLeads.map((l: PrismaLead) => ({
       ...l,
       createdAt: l.createdAt.toISOString(),
       updatedAt: l.updatedAt.toISOString(),
