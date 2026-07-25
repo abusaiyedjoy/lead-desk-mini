@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
+import { getSession } from "@/lib/session";
 import { LeadsTable } from "@/components/admin/LeadsTable";
+import { LogoutButton } from "@/components/admin/LogoutButton";
 import Link from "next/link";
 import { ArrowLeft, Shield, Sparkles } from "lucide-react";
 import { Lead } from "@/types/lead";
@@ -8,6 +10,8 @@ import { Lead } from "@/types/lead";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
+  const session = await getSession();
+
   let initialLeads: Lead[] = [];
   let dbError = false;
 
@@ -52,11 +56,21 @@ export default async function AdminPage() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 border border-blue-500/30 text-blue-400">
               <Sparkles className="w-3.5 h-3.5" />
               Live Workspace
             </span>
+
+            {/* Signed-in user pill */}
+            {session?.email && (
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-900 border border-slate-800 text-slate-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                {session.email}
+              </span>
+            )}
+
+            <LogoutButton />
           </div>
         </div>
       </header>

@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { leadFormSchema } from "@/lib/validations/lead";
+import { getSession } from "@/lib/session";
 
+// POST /api/leads — public endpoint for lead capture form
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     // Server-side validation with Zod
     const validationResult = leadFormSchema.safeParse(body);
-    
+
     if (!validationResult.success) {
       return NextResponse.json(
         {
@@ -53,7 +55,17 @@ export async function POST(request: NextRequest) {
   }
 }
 
+// GET /api/leads — admin-only: list/search leads
 export async function GET(request: NextRequest) {
+  // Auth guard: only authenticated admins may list leads
+  const session = await getSession();
+  if (!session) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
   try {
     const searchParams = request.nextUrl.searchParams;
     const query = searchParams.get("q")?.trim() || "";
