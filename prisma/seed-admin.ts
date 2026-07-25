@@ -1,19 +1,4 @@
-/**
- * prisma/seed-admin.ts
- *
- * Creates (or updates) the admin user with a bcrypt-hashed password.
- * Uses upsert so it's safe to run multiple times — will not create duplicates.
- *
- * Usage:
- *   npx tsx prisma/seed-admin.ts
- *
- * Or via npm script:
- *   npm run seed:admin
- *
- * Environment variables required:
- *   ADMIN_EMAIL    - Admin email address (default: admin@leaddesk.com)
- *   ADMIN_PASSWORD - Admin plain-text password to hash (default: LeadDesk2025!)
- */
+
 
 import bcrypt from "bcryptjs";
 import { prisma } from "../src/lib/prisma";

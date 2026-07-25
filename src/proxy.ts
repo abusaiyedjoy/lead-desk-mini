@@ -8,7 +8,7 @@ const AUTH_PATHS = ["/admin/login"];
 
 const COOKIE_NAME = "leaddesk_session";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isProtected = PROTECTED_PATHS.some(
